@@ -18,7 +18,7 @@ function resize() {
 		let height = slideContainer.offsetWidth * 3/4;
 		slideContainer.style.setProperty("height", height + "px");
 	}
-	let fontSize = slideContainer.offsetHeight * 0.04;
+	let fontSize = slideContainer.offsetHeight * 0.035;
 	slideContainer.style.setProperty("font-size", fontSize + "px");
 }
 
@@ -27,7 +27,8 @@ addEventListener("keydown", (e) => {
 	slides[currentSlide].classList.remove("active");
 	if (e.code == "ArrowLeft") {
 		currentSlide = mod((currentSlide - 1), numSlides);
-	} else {
+	}
+	if ((e.code == "ArrowRight") || (e.code == "Space")) {
 		currentSlide = mod((currentSlide + 1), numSlides);
 	}
 	slides[currentSlide].classList.add("active");
