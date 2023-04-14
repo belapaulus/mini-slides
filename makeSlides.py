@@ -14,8 +14,10 @@ with open("template_slide.html") as file:
 	slide_template = file.read()
 
 slide_dir = Path("./slides")
-num_slides = len(list(slide_dir.iterdir()))
-for p in slide_dir.iterdir():
+slide_files = [p for p in slide_dir.iterdir() if not p.stem[0] == '.']
+slide_files.sort()
+num_slides = len(slide_files)
+for p in slide_files:
 	with p.open() as file:
 		slide_markdown = file.read()
 	slide_html = markdown(slide_markdown)
