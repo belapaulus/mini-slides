@@ -20,7 +20,7 @@ num_slides = len(slide_files)
 for p in slide_files:
 	with p.open() as file:
 		slide_markdown = file.read()
-	slide_html = markdown(slide_markdown)
+	slide_html = markdown(slide_markdown, extensions=["attr_list"])
 	slides += slide_template.format(content=slide_html,
 			footer_text=footer_text, 
 			slide_number="{}/{}".format(slide_number, num_slides))
