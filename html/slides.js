@@ -1,9 +1,16 @@
 let currentSlide = 0;
 let slides = document.getElementsByClassName("slide");
-let numSlides = slides.length;
 
 function mod(n, m) {
 	return (((n % m) + m) % m);
+}
+
+// i == 1 goes to the next slide
+// i == -1 goes to the previous slide
+function changeSlide(i) {
+	slides[currentSlide].classList.remove("active");
+	currentSlide = mod((currentSlide + i), slides.length);
+	slides[currentSlide].classList.add("active");
 }
 
 function resize() {
@@ -23,27 +30,24 @@ function resize() {
 }
 
 addEventListener("resize", resize);
+
 addEventListener("keydown", (e) => {
-	slides[currentSlide].classList.remove("active");
 	if (e.code == "ArrowLeft") {
-		currentSlide = mod((currentSlide - 1), numSlides);
+		changeSlide(-1);
 	}
 	if ((e.code == "ArrowRight") || (e.code == "Space")) {
-		currentSlide = mod((currentSlide + 1), numSlides);
+		changeSlide(1);
 	}
-	slides[currentSlide].classList.add("active");
-});
-addEventListener("click", (e) => {
-	slides[currentSlide].classList.remove("active");
-	if (e.x < (window.innerWidth / 2)) {
-		currentSlide = mod((currentSlide - 1), numSlides);
-	}
-	if (e.x > (window.innerWidth / 2)) {
-		currentSlide = mod((currentSlide + 1), numSlides);
-	}
-	slides[currentSlide].classList.add("active");
 });
 
+addEventListener("click", (e) => {
+	if (e.x < (window.innerWidth / 2)) {
+		changeSlide(-1);
+	}
+	if (e.x > (window.innerWidth / 2)) {
+		changeSlide(1);
+	}
+});
 
 addEventListener("load", () => {
 	slides[currentSlide].classList.add("active");
