@@ -33,6 +33,17 @@ addEventListener("keydown", (e) => {
 	}
 	slides[currentSlide].classList.add("active");
 });
+addEventListener("click", (e) => {
+	slides[currentSlide].classList.remove("active");
+	if (e.x < (window.innerWidth / 2)) {
+		currentSlide = mod((currentSlide - 1), numSlides);
+	}
+	if (e.x > (window.innerWidth / 2)) {
+		currentSlide = mod((currentSlide + 1), numSlides);
+	}
+	slides[currentSlide].classList.add("active");
+});
+
 
 addEventListener("load", () => {
 	slides[currentSlide].classList.add("active");
